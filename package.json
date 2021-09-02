@@ -1,0 +1,94 @@
+{
+  "name": "CAP-kt",
+  "version": "1.0.0",
+  "description": "A simple CAP project.",
+  "repository": "<Add your repository here>",
+  "license": "UNLICENSED",
+  "private": true,
+  "dependencies": {
+    "@sap/cds": "^5",
+    "cf-nodejs-logging-support": "^6.10.0",
+    "cors": "^2.8.5",
+    "express": "^4",
+    "hdb": "^0.18.3",
+    "passport": "^0.4.1",
+    "swagger-ui-express": "^4.1.6"
+  },
+  "devDependencies": {
+    "sqlite3": "^5.0.2"
+  },
+  "scripts": {
+    "start": "cds run",
+    "dev": "NODE_ENV=dev && cds run",
+    "to-openapi": "cds compile srv --to openapi -s all -o srv --openapi:diagram"
+  },
+  "eslintConfig": {
+    "extends": "eslint:recommended",
+    "env": {
+      "es2020": true,
+      "node": true,
+      "jest": true,
+      "mocha": true
+    },
+    "globals": {
+      "SELECT": true,
+      "INSERT": true,
+      "UPDATE": true,
+      "DELETE": true,
+      "CREATE": true,
+      "DROP": true,
+      "CDL": true,
+      "CQL": true,
+      "CXL": true,
+      "cds": true
+    },
+    "rules": {
+      "no-console": "off",
+      "require-atomic-updates": "off"
+    }
+  },
+  "cds": {
+    "requires": {
+      "db": {
+        "kind": "sql"
+      },
+      "auth": {
+        "strategy": "mock",
+        "users": {
+          "C5309036": {
+            "password": "1234",
+            "roles": [
+              "EndUser",
+              "ADMIN"
+            ]
+          },
+          "I123456": {
+            "password": "567",
+            "roles": [
+              "EndUser"
+            ]
+          }
+        }
+      }
+    },
+    "hana": {
+      "deploy-format": "hdbtable"
+    },
+    "[production]": {
+      "requires": {
+        "db": {
+          "kind": "hana"
+        },
+        "auth": {
+          "impl": "srv/auth.js"
+        },
+        "hana": {
+          "deploy-format": "hdbtable"
+        }
+      },
+      "data": {
+        "sql_mapping": "quoted"
+      }
+    }
+  }
+}

@@ -9,6 +9,7 @@ const readFile = promisify(require("fs").readFile);
 const swaggerUi = require("swagger-ui-express");
 const cds = require("@sap/cds");
 const cors = require("cors");
+const proxy = require("@sap/cds-odata-v2-adapter-proxy");
 //var log = require("cf-nodejs-logging-support");
 
 const debug = cds.debug("openapi");
@@ -16,6 +17,7 @@ let app,
   docCache = {};
 
 cds
+  .on("bootstrap", app => app.use(proxy()))
   .on("bootstrap", (_app) => {
     app = _app;
     app.use(cors()); // allow to be called from e.g. editor.swagger.io

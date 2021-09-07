@@ -1,7 +1,7 @@
 using {db as my} from '../db/schema';
 
-
-service AdminService @(requires : 'ADMIN') {
+@(requires : 'Admin')
+service AdminService {
 
     entity Users      as projection on my.Users;
     entity Activities as projection on my.Activitys;
@@ -9,19 +9,20 @@ service AdminService @(requires : 'ADMIN') {
 
 }
 
-// @(requires : 'authenticated-user')
+@(requires : 'authenticated-user')
 service UserService {
 
     entity Users @readonly @(restrict : [{
-        grant : [
-            'READ'
-        ],
+        grant : ['READ'],
         to    : 'EndUser',
         where : 'createdBy = $user'
     }]) as projection on my.Users;
 
-    entity Activities @readonly @(restrict : [{
-        grant : 'READ',
+    entity Activities @(restrict : [{
+        grant : [
+            'READ',
+            'WRITE'
+        ],
         to    : 'EndUser',
         where : 'createdBy = $user'
     }]) as projection on my.Activitys;

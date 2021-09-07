@@ -1,5 +1,16 @@
 {
   "requires": {
-
+    "auth": {
+      "strategy": "mock",
+      "users": {
+        "<YOUR_USER>": {
+          "password": "YOUR PASSWORD",
+          "roles": [
+            "YOUR-ROLE",
+            "ADMIN"
+          ]
+        }
+      }
+    }
   }
 }

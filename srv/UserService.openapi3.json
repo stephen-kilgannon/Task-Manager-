@@ -1,13 +1,13 @@
 {
   "openapi": "3.0.2",
   "info": {
-    "title": "Service for namespace ActivityService",
-    "description": "This service is located at [/activity/](/activity/)\n\n## Entity Data Model\n![ER Diagram](https://yuml.me/diagram/class/[Users{bg:lightslategray}],[Users]-*>[Activities],[Activities{bg:lightslategray}],[Activities]-*>[Steps],[Steps{bg:lightslategray}],[Steps%20{bg:lawngreen}]++-*>[Steps],[Activities%20{bg:lawngreen}]++-*>[Activities],[Users%20{bg:lawngreen}]++-*>[Users])\n\n### Legend\n![Legend](https://yuml.me/diagram/plain;dir:TB;scale:60/class/[External.Type{bg:whitesmoke}],[ComplexType],[EntityType{bg:lightslategray}],[EntitySet/Singleton/Operation{bg:lawngreen}])",
+    "title": "User-Service-test",
+    "description": "This service is located at [/user/](/user/)\n\n## Entity Data Model\n![ER Diagram](https://yuml.me/diagram/class/[Users{bg:lightslategray}],[Users]-*>[Activities],[Activities{bg:lightslategray}],[Activities]-*>[Steps],[UserActivities{bg:lightslategray}],[UserActivitieSteps{bg:lightslategray}],[Steps{bg:lightslategray}],[Steps%20{bg:lawngreen}]++-*>[Steps],[UserActivitieSteps%20{bg:lawngreen}]++-*>[UserActivitieSteps],[UserActivities%20{bg:lawngreen}]++-*>[UserActivities],[Activities%20{bg:lawngreen}]++-*>[Activities],[Users%20{bg:lawngreen}]++-*>[Users])\n\n### Legend\n![Legend](https://yuml.me/diagram/plain;dir:TB;scale:60/class/[External.Type{bg:whitesmoke}],[ComplexType],[EntityType{bg:lightslategray}],[EntitySet/Singleton/Operation{bg:lawngreen}])",
     "version": ""
   },
   "servers": [
     {
-      "url": "/activity"
+      "url": "/user"
     }
   ],
   "tags": [
@@ -18,6 +18,12 @@
       "name": "Activities"
     },
     {
+      "name": "UserActivities"
+    },
+    {
+      "name": "UserActivitieSteps"
+    },
+    {
       "name": "Steps"
     }
   ],
@@ -25,9 +31,7 @@
     "/Users": {
       "get": {
         "summary": "Retrieve a list of users.",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "parameters": [
           {
             "$ref": "#/components/parameters/top"
@@ -68,8 +72,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "firstName",
                   "firstName desc",
                   "lastName",
@@ -97,7 +101,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "firstName",
                   "lastName",
                   "email",
@@ -116,10 +120,7 @@
               "uniqueItems": true,
               "items": {
                 "type": "string",
-                "enum": [
-                  "*",
-                  "activity"
-                ]
+                "enum": ["*", "activity"]
               }
             }
           }
@@ -139,7 +140,7 @@
                     "value": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ActivityService.Users"
+                        "$ref": "#/components/schemas/UserService.Users"
                       }
                     }
                   }
@@ -153,12 +154,12 @@
         }
       }
     },
-    "/Users({ID})": {
+    "/Users({id})": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -168,9 +169,7 @@
       ],
       "get": {
         "summary": "Retrieve a single user.",
-        "tags": [
-          "Users"
-        ],
+        "tags": ["Users"],
         "parameters": [
           {
             "name": "$select",
@@ -187,7 +186,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "firstName",
                   "lastName",
                   "email",
@@ -206,10 +205,7 @@
               "uniqueItems": true,
               "items": {
                 "type": "string",
-                "enum": [
-                  "*",
-                  "activity"
-                ]
+                "enum": ["*", "activity"]
               }
             }
           }
@@ -220,7 +216,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ActivityService.Users"
+                  "$ref": "#/components/schemas/UserService.Users"
                 }
               }
             }
@@ -231,12 +227,12 @@
         }
       }
     },
-    "/Users({ID})/activity": {
+    "/Users({id})/activity": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -246,10 +242,7 @@
       ],
       "get": {
         "summary": "Retrieve a list of activity of a user.",
-        "tags": [
-          "Users",
-          "Activities"
-        ],
+        "tags": ["Users", "Activities"],
         "parameters": [
           {
             "$ref": "#/components/parameters/top"
@@ -290,8 +283,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "dueDate",
@@ -319,7 +312,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "dueDate",
                   "status",
@@ -338,10 +331,7 @@
               "uniqueItems": true,
               "items": {
                 "type": "string",
-                "enum": [
-                  "*",
-                  "steps"
-                ]
+                "enum": ["*", "steps"]
               }
             }
           }
@@ -361,10 +351,40 @@
                     "value": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ActivityService.Activities"
+                        "$ref": "#/components/schemas/UserService.Activities"
                       }
                     }
                   }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a single activity of a user.",
+        "tags": ["Users", "Activities"],
+        "requestBody": {
+          "description": "New activity",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserService.Activities-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserService.Activities"
                 }
               }
             }
@@ -378,9 +398,7 @@
     "/Activities": {
       "get": {
         "summary": "Retrieve a list of activities.",
-        "tags": [
-          "Activities"
-        ],
+        "tags": ["Activities"],
         "parameters": [
           {
             "$ref": "#/components/parameters/top"
@@ -421,8 +439,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "dueDate",
@@ -450,7 +468,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "dueDate",
                   "status",
@@ -469,10 +487,7 @@
               "uniqueItems": true,
               "items": {
                 "type": "string",
-                "enum": [
-                  "*",
-                  "steps"
-                ]
+                "enum": ["*", "steps"]
               }
             }
           }
@@ -492,7 +507,7 @@
                     "value": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ActivityService.Activities"
+                        "$ref": "#/components/schemas/UserService.Activities"
                       }
                     }
                   }
@@ -504,14 +519,44 @@
             "$ref": "#/components/responses/error"
           }
         }
+      },
+      "post": {
+        "summary": "Create a single activity.",
+        "tags": ["Activities"],
+        "requestBody": {
+          "description": "New activity",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserService.Activities-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created activity",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserService.Activities"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
       }
     },
-    "/Activities({ID})": {
+    "/Activities({id})": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -521,9 +566,7 @@
       ],
       "get": {
         "summary": "Retrieve a single activity.",
-        "tags": [
-          "Activities"
-        ],
+        "tags": ["Activities"],
         "parameters": [
           {
             "name": "$select",
@@ -540,7 +583,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "dueDate",
                   "status",
@@ -559,10 +602,7 @@
               "uniqueItems": true,
               "items": {
                 "type": "string",
-                "enum": [
-                  "*",
-                  "steps"
-                ]
+                "enum": ["*", "steps"]
               }
             }
           }
@@ -573,7 +613,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ActivityService.Activities"
+                  "$ref": "#/components/schemas/UserService.Activities"
                 }
               }
             }
@@ -582,14 +622,49 @@
             "$ref": "#/components/responses/error"
           }
         }
+      },
+      "patch": {
+        "summary": "Change a single activity.",
+        "tags": ["Activities"],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserService.Activities-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a single activity.",
+        "tags": ["Activities"],
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
       }
     },
-    "/Activities({ID})/steps": {
+    "/Activities({id})/steps": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -599,10 +674,7 @@
       ],
       "get": {
         "summary": "Retrieve a list of steps of a activity.",
-        "tags": [
-          "Activities",
-          "Steps"
-        ],
+        "tags": ["Activities", "Steps"],
         "parameters": [
           {
             "$ref": "#/components/parameters/top"
@@ -643,8 +715,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "status",
@@ -670,7 +742,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "status",
                   "activityFK"
@@ -694,7 +766,243 @@
                     "value": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ActivityService.Steps"
+                        "$ref": "#/components/schemas/UserService.Steps"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "post": {
+        "summary": "Create a single step of a activity.",
+        "tags": ["Activities", "Steps"],
+        "requestBody": {
+          "description": "New step",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserService.Steps-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created step",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserService.Steps"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/UserActivities": {
+      "get": {
+        "summary": "Retrieve a list of user activities.",
+        "tags": ["UserActivities"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "userId",
+                  "userId desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "title",
+                  "title desc",
+                  "status",
+                  "status desc",
+                  "id",
+                  "id desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "userId",
+                  "createdBy",
+                  "createdAt",
+                  "title",
+                  "status",
+                  "id"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved user activities",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of UserActivities",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UserService.UserActivities"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      }
+    },
+    "/UserActivitieSteps": {
+      "get": {
+        "summary": "Retrieve a list of user activitie steps.",
+        "tags": ["UserActivitieSteps"],
+        "parameters": [
+          {
+            "$ref": "#/components/parameters/top"
+          },
+          {
+            "$ref": "#/components/parameters/skip"
+          },
+          {
+            "$ref": "#/components/parameters/search"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter items by property values, see [Filtering](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionfilter)",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "$ref": "#/components/parameters/count"
+          },
+          {
+            "name": "$orderby",
+            "description": "Order items by property values, see [Sorting](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionorderby)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "userId",
+                  "userId desc",
+                  "createdBy",
+                  "createdBy desc",
+                  "createdAt",
+                  "createdAt desc",
+                  "id",
+                  "id desc",
+                  "title",
+                  "title desc",
+                  "status",
+                  "status desc"
+                ]
+              }
+            }
+          },
+          {
+            "name": "$select",
+            "description": "Select properties to be returned, see [Select](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_SystemQueryOptionselect)",
+            "in": "query",
+            "explode": false,
+            "schema": {
+              "type": "array",
+              "uniqueItems": true,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "userId",
+                  "createdBy",
+                  "createdAt",
+                  "id",
+                  "title",
+                  "status"
+                ]
+              }
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieved user activitie steps",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "title": "Collection of UserActivitieSteps",
+                  "properties": {
+                    "@odata.count": {
+                      "$ref": "#/components/schemas/count"
+                    },
+                    "value": {
+                      "type": "array",
+                      "items": {
+                        "$ref": "#/components/schemas/UserService.UserActivitieSteps"
                       }
                     }
                   }
@@ -711,9 +1019,7 @@
     "/Steps": {
       "get": {
         "summary": "Retrieve a list of steps.",
-        "tags": [
-          "Steps"
-        ],
+        "tags": ["Steps"],
         "parameters": [
           {
             "$ref": "#/components/parameters/top"
@@ -754,8 +1060,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "status",
@@ -781,7 +1087,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "status",
                   "activityFK"
@@ -805,7 +1111,7 @@
                     "value": {
                       "type": "array",
                       "items": {
-                        "$ref": "#/components/schemas/ActivityService.Steps"
+                        "$ref": "#/components/schemas/UserService.Steps"
                       }
                     }
                   }
@@ -817,14 +1123,44 @@
             "$ref": "#/components/responses/error"
           }
         }
+      },
+      "post": {
+        "summary": "Create a single step.",
+        "tags": ["Steps"],
+        "requestBody": {
+          "description": "New step",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserService.Steps-create"
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Created step",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UserService.Steps"
+                }
+              }
+            }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
       }
     },
-    "/Steps({ID})": {
+    "/Steps({id})": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -834,9 +1170,7 @@
       ],
       "get": {
         "summary": "Retrieve a single step.",
-        "tags": [
-          "Steps"
-        ],
+        "tags": ["Steps"],
         "parameters": [
           {
             "name": "$select",
@@ -853,7 +1187,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "status",
                   "activityFK"
@@ -868,10 +1202,45 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ActivityService.Steps"
+                  "$ref": "#/components/schemas/UserService.Steps"
                 }
               }
             }
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "patch": {
+        "summary": "Change a single step.",
+        "tags": ["Steps"],
+        "requestBody": {
+          "description": "New property values",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/UserService.Steps-update"
+              }
+            }
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          },
+          "4XX": {
+            "$ref": "#/components/responses/error"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete a single step.",
+        "tags": ["Steps"],
+        "responses": {
+          "204": {
+            "description": "Success"
           },
           "4XX": {
             "$ref": "#/components/responses/error"
@@ -883,9 +1252,7 @@
       "post": {
         "summary": "Send a group of requests",
         "description": "Group multiple requests into a single request payload, see [Batch Requests](http://docs.oasis-open.org/odata/odata/v4.01/odata-v4.01-part1-protocol.html#sec_BatchRequests).\n\n*Please note that \"Try it out\" is not supported for this request.*",
-        "tags": [
-          "Batch Requests"
-        ],
+        "tags": ["Batch Requests"],
         "requestBody": {
           "required": true,
           "description": "Batch request",
@@ -919,7 +1286,7 @@
   },
   "components": {
     "schemas": {
-      "ActivityService.Users": {
+      "UserService.Users": {
         "title": "Users",
         "type": "object",
         "properties": {
@@ -947,7 +1314,7 @@
             "nullable": true,
             "description": "{i18n>UserID.Description}"
           },
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -975,7 +1342,7 @@
           "activity": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ActivityService.Activities"
+              "$ref": "#/components/schemas/UserService.Activities"
             }
           },
           "activity@odata.count": {
@@ -983,7 +1350,7 @@
           }
         }
       },
-      "ActivityService.Activities": {
+      "UserService.Activities": {
         "title": "Activities",
         "type": "object",
         "properties": {
@@ -1011,7 +1378,7 @@
             "nullable": true,
             "description": "{i18n>UserID.Description}"
           },
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -1039,7 +1406,7 @@
           "steps": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/ActivityService.Steps"
+              "$ref": "#/components/schemas/UserService.Steps"
             }
           },
           "steps@odata.count": {
@@ -1047,7 +1414,148 @@
           }
         }
       },
-      "ActivityService.Steps": {
+      "UserService.Activities-create": {
+        "title": "Activities (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "steps": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UserService.Steps-create"
+            }
+          }
+        },
+        "required": ["id"]
+      },
+      "UserService.Activities-update": {
+        "title": "Activities (for update)",
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "dueDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "userId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          }
+        }
+      },
+      "UserService.UserActivities": {
+        "title": "UserActivities",
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true,
+            "description": "{i18n>UserID.Description}"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UserService.UserActivitieSteps": {
+        "title": "UserActivitieSteps",
+        "type": "object",
+        "properties": {
+          "userId": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "createdBy": {
+            "type": "string",
+            "maxLength": 255,
+            "nullable": true,
+            "description": "{i18n>UserID.Description}"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2017-04-13T15:51:04.0000000Z",
+            "nullable": true
+          },
+          "id": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          }
+        }
+      },
+      "UserService.Steps": {
         "title": "Steps",
         "type": "object",
         "properties": {
@@ -1075,10 +1583,57 @@
             "nullable": true,
             "description": "{i18n>UserID.Description}"
           },
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "activityFK": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        }
+      },
+      "UserService.Steps-create": {
+        "title": "Steps (for create)",
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "title": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "maxLength": 50,
+            "nullable": true
+          },
+          "activityFK": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "required": ["id"]
+      },
+      "UserService.Steps-update": {
+        "title": "Steps (for update)",
+        "type": "object",
+        "properties": {
           "title": {
             "type": "string",
             "maxLength": 50,
@@ -1109,16 +1664,11 @@
       },
       "error": {
         "type": "object",
-        "required": [
-          "error"
-        ],
+        "required": ["error"],
         "properties": {
           "error": {
             "type": "object",
-            "required": [
-              "code",
-              "message"
-            ],
+            "required": ["code", "message"],
             "properties": {
               "code": {
                 "type": "string"
@@ -1133,10 +1683,7 @@
                 "type": "array",
                 "items": {
                   "type": "object",
-                  "required": [
-                    "code",
-                    "message"
-                  ],
+                  "required": ["code", "message"],
                   "properties": {
                     "code": {
                       "type": "string"

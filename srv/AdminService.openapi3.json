@@ -68,8 +68,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "firstName",
                   "firstName desc",
                   "lastName",
@@ -97,7 +97,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "firstName",
                   "lastName",
                   "email",
@@ -185,12 +185,12 @@
         }
       }
     },
-    "/Users({ID})": {
+    "/Users({id})": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -219,7 +219,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "firstName",
                   "lastName",
                   "email",
@@ -302,12 +302,12 @@
         }
       }
     },
-    "/Users({ID})/activity": {
+    "/Users({id})/activity": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -361,8 +361,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "dueDate",
@@ -390,7 +390,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "dueDate",
                   "status",
@@ -525,8 +525,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "dueDate",
@@ -554,7 +554,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "dueDate",
                   "status",
@@ -642,12 +642,12 @@
         }
       }
     },
-    "/Activities({ID})": {
+    "/Activities({id})": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -676,7 +676,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "dueDate",
                   "status",
@@ -759,12 +759,12 @@
         }
       }
     },
-    "/Activities({ID})/steps": {
+    "/Activities({id})/steps": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -818,8 +818,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "status",
@@ -845,7 +845,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "status",
                   "activityFK"
@@ -962,8 +962,8 @@
                   "modifiedAt desc",
                   "modifiedBy",
                   "modifiedBy desc",
-                  "ID",
-                  "ID desc",
+                  "id",
+                  "id desc",
                   "title",
                   "title desc",
                   "status",
@@ -989,7 +989,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "status",
                   "activityFK"
@@ -1059,12 +1059,12 @@
         }
       }
     },
-    "/Steps({ID})": {
+    "/Steps({id})": {
       "parameters": [
         {
-          "description": "key: ID",
+          "description": "key: id",
           "in": "path",
-          "name": "ID",
+          "name": "id",
           "required": true,
           "schema": {
             "type": "integer",
@@ -1093,7 +1093,7 @@
                   "createdBy",
                   "modifiedAt",
                   "modifiedBy",
-                  "ID",
+                  "id",
                   "title",
                   "status",
                   "activityFK"
@@ -1226,7 +1226,7 @@
             "nullable": true,
             "description": "{i18n>UserID.Description}"
           },
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -1266,7 +1266,7 @@
         "title": "Users (for create)",
         "type": "object",
         "properties": {
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -1299,7 +1299,7 @@
           }
         },
         "required": [
-          "ID"
+          "id"
         ]
       },
       "AdminService.Users-update": {
@@ -1357,7 +1357,7 @@
             "nullable": true,
             "description": "{i18n>UserID.Description}"
           },
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -1397,7 +1397,7 @@
         "title": "Activities (for create)",
         "type": "object",
         "properties": {
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -1430,7 +1430,7 @@
           }
         },
         "required": [
-          "ID"
+          "id"
         ]
       },
       "AdminService.Activities-update": {
@@ -1488,7 +1488,7 @@
             "nullable": true,
             "description": "{i18n>UserID.Description}"
           },
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -1513,7 +1513,7 @@
         "title": "Steps (for create)",
         "type": "object",
         "properties": {
-          "ID": {
+          "id": {
             "type": "integer",
             "format": "int32"
           },
@@ -1534,7 +1534,7 @@
           }
         },
         "required": [
-          "ID"
+          "id"
         ]
       },
       "AdminService.Steps-update": {

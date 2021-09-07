@@ -7,6 +7,8 @@
   "private": true,
   "dependencies": {
     "@sap/cds": "^5",
+    "@sap/cds-odata-v2-adapter-proxy": "^1.7.10",
+    "@sap/html5-app-deployer": "^3.1.1",
     "cf-nodejs-logging-support": "^6.10.0",
     "cors": "^2.8.5",
     "express": "^4",
@@ -15,7 +17,12 @@
     "swagger-ui-express": "^4.1.6"
   },
   "devDependencies": {
+    "@sap/ux-specification": "^1.90.8",
     "sqlite3": "^5.0.2"
+  },
+  "engines": {
+    "node": "^14",
+    "npm": "^7"
   },
   "scripts": {
     "start": "cds run",
@@ -50,7 +57,7 @@
   "cds": {
     "requires": {
       "db": {
-        "kind": "sql"
+        "kind": "hana"
       },
       "auth": {
         "strategy": "mock",
@@ -80,7 +87,22 @@
           "kind": "hana"
         },
         "auth": {
-          "impl": "srv/auth.js"
+          "strategy": "mock",
+          "users": {
+            "C5309036": {
+              "password": "1234",
+              "roles": [
+                "EndUser",
+                "ADMIN"
+              ]
+            },
+            "I123456": {
+              "password": "567",
+              "roles": [
+                "EndUser"
+              ]
+            }
+          }
         },
         "hana": {
           "deploy-format": "hdbtable"

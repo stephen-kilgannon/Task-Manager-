@@ -1,0 +1,12 @@
+applications:
+  - name: CAP-kt-approuter
+    routes:
+      - route: CAP-kt-approuter.cfapps.eu10.hana.ondemand.com
+    path: approuter
+    memory: 128M
+    buildpacks:
+      - nodejs_buildpack
+    env:
+      SESSION_TIMEOUT: 480
+    services:
+      - CAP-kt-uaa

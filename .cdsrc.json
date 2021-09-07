@@ -3,12 +3,13 @@
     "auth": {
       "strategy": "mock",
       "users": {
-        "<YOUR_USER>": {
-          "password": "YOUR PASSWORD",
-          "roles": [
-            "YOUR-ROLE",
-            "ADMIN"
-          ]
+        "C5309036": {
+          "password": "1234",
+          "roles": ["EndUser", "ADMIN"]
+        },
+        "I123456": {
+          "password": "567",
+          "roles": ["EndUser"]
         }
       }
     }

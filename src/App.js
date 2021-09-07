@@ -4,19 +4,17 @@ import Tasks from "./components/Tasks";
 import AddTask from "./components/AddTask";
 import { useState, useEffect } from "react";
 
+const URL =
+  "https://cb976dedtrial-dev-cap-kt-srv.cfapps.eu10.hana.ondemand.com/user/Activities";
+
 function App() {
   const [showAddTask, setShowAddTask] = useState(false);
-  const [tasks, setTasks] = useState([
-    { id: 1, title: "Do this", dueDate: "20-12-2021", status: true },
-    // { id: 2, text: "Do this 1", day: "20-10-2021", reminder: true },
-    // { id: 3, text: "Do this 2", day: "20-01-2021", reminder: true },
-  ]);
+  const [tasks, setTasks] = useState([]);
 
   //loadData
   useEffect(() => {
     const getTasks = async () => {
       const tasksFromServer = await fetchTasks();
-
       setTasks(tasksFromServer);
     };
     getTasks();
@@ -24,7 +22,12 @@ function App() {
 
   // Fetch Tasks
   const fetchTasks = async () => {
-    const res = await fetch("http://localhost:4004/admin/Activities");
+    const res = await fetch(URL, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
     const data = await res.json();
     let test = Object.values(data);
     const returnData = test[1];
@@ -32,17 +35,39 @@ function App() {
   };
 
   // Add Task
-  const addTask = (task) => {
-    const id = tasks.length + 1;
-
+  const addTask = async (task) => {
+    const id = getRandomInt(50);
+    console.log(id);
     const newTask = { id, ...task };
-
+    console.log(task);
     setTasks([...tasks, newTask]);
+
+    const response = await fetch(URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(newTask), // body data type must match "Content-Type" header
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
   };
 
+  //generate Id
+  function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+  }
+
   // Delete Task
-  const deleteTask = (id) => {
+  const deleteTask = async (id) => {
     setTasks(tasks.filter((task) => task.id !== id));
+
+    const response = await fetch(URL + `(${id})`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    return response.json(); // parses JSON response into native JavaScript objects
   };
 
   // Toggle Task
